@@ -3,10 +3,12 @@
 
 <%
     HttpSession _sesion = request.getSession(false);
+    
     String _avatar = null;
+    Usuario _usuario = null;
 
     if (_sesion != null) {
-        Usuario _usuario = (Usuario) _sesion.getAttribute("usuario");
+        _usuario = (Usuario) _sesion.getAttribute("usuario");
         if (_usuario != null) {
             _avatar = _usuario.getAvatar();
         }
@@ -26,10 +28,11 @@
     </div>
 
     <div class="user">
-        <a href="#">
-            <% if (_avatar != null) {%>
+        <a href="?cmd=usuario-logout">
+            <% if (_usuario != null) {%>
             
-            <img class="avatar" src="public/img/usuario.jpg" alt="User"/>
+            <!--<img class="avatar" src="public/img/usuario.jpg" alt="User"/>-->
+            <img class="avatar" src="<%= _usuario.getAvatar() %>" alt="Avatar"/>
             
             <% } else { %>
         

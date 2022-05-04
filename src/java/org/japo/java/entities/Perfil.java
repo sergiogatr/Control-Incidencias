@@ -5,6 +5,7 @@
  */
 package org.japo.java.entities;
 
+import java.util.Objects;
 import org.japo.java.libraries.UtilesPerfiles;
 
 /**
@@ -28,21 +29,21 @@ public final class Perfil {
     public Perfil(int id, String nombre, String info) {
         
         // Validación ID
-        if (validarID()) {
+        if (UtilesPerfiles.validarId(id)) {
             this.id = id;
         } else {
             this.id = UtilesPerfiles.DEF_ID;
         }
         
         // Validación Nombre
-        if (validarNombre()) {
+        if (UtilesPerfiles.validarNombre(nombre)) {
             this.nombre = nombre;
         } else {
             this.nombre = UtilesPerfiles.DEF_NOMBRE;
         }
         
         // Validación Info
-        if (validarInfo()) {
+        if (UtilesPerfiles.validarInfo(info)) {
             this.info = info;
         } else {
             this.info = UtilesPerfiles.DEF_INFO;
@@ -57,7 +58,7 @@ public final class Perfil {
     }
 
     public void setId(int id) {
-        if (validarID()) {
+        if (UtilesPerfiles.validarId(id)) {
             this.id = id;
         } 
     }
@@ -67,7 +68,7 @@ public final class Perfil {
     }
 
     public void setNombre(String nombre) {
-        if (validarNombre()) {
+        if (UtilesPerfiles.validarNombre(nombre)) {
             this.nombre = nombre;
         }
     }
@@ -77,23 +78,31 @@ public final class Perfil {
     }
 
     public void setInfo(String info) {
-        if (validarInfo()) {
+        if (UtilesPerfiles.validarInfo(info)) {
             this.info = info;
         }
     } 
 
-    
-    // Validación
-    private boolean validarID() {
-        return UtilesPerfiles.validarId(id);
+    @Override
+    public boolean equals(Object o) {
+        boolean testOK = false;
+        if (o instanceof Perfil) {
+            Perfil p = (Perfil) o;
+            testOK
+                    = id == p.getId()
+                    && nombre.equals(p.getNombre())
+                    && info.equals(p.getInfo());
+        }
+        return testOK;
     }
 
-    private boolean validarNombre() {
-        return UtilesPerfiles.validarNombre(nombre);
-    }
-
-    private boolean validarInfo() {
-        return UtilesPerfiles.validarInfo(info);
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + this.id;
+        hash = 29 * hash + Objects.hashCode(this.nombre);
+        hash = 29 * hash + Objects.hashCode(this.info);
+        return hash;
     }
     
 }
