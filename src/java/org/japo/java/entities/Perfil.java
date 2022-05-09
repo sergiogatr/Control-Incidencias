@@ -14,16 +14,20 @@ import org.japo.java.libraries.UtilesPerfiles;
  */
 public final class Perfil {
     
+    
     // CAMPOS
     private int id;
     private String nombre;
     private String info;
 
+    
     // Constructores
     public Perfil() {
+        
         this.id = UtilesPerfiles.DEF_ID;
         this.nombre = UtilesPerfiles.DEF_NOMBRE;
         this.info = UtilesPerfiles.DEF_INFO;
+        
     }
     
     public Perfil(int id, String nombre, String info) {
@@ -35,12 +39,14 @@ public final class Perfil {
             this.id = UtilesPerfiles.DEF_ID;
         }
         
+        
         // Validación Nombre
         if (UtilesPerfiles.validarNombre(nombre)) {
             this.nombre = nombre;
         } else {
             this.nombre = UtilesPerfiles.DEF_NOMBRE;
         }
+        
         
         // Validación Info
         if (UtilesPerfiles.validarInfo(info)) {
@@ -63,6 +69,7 @@ public final class Perfil {
         } 
     }
 
+    
     public String getNombre() {
         return nombre;
     }
@@ -73,6 +80,7 @@ public final class Perfil {
         }
     }
 
+    
     public String getInfo() {
         return info;
     }
@@ -83,6 +91,7 @@ public final class Perfil {
         }
     } 
 
+    
     @Override
     public boolean equals(Object o) {
         boolean testOK = false;
@@ -99,9 +108,9 @@ public final class Perfil {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 29 * hash + this.id;
-        hash = 29 * hash + Objects.hashCode(this.nombre);
-        hash = 29 * hash + Objects.hashCode(this.info);
+        hash = 53 * hash + this.id;
+        hash = 53 * hash + Objects.hashCode(this.nombre);
+        hash = 53 * hash + Objects.hashCode(this.info);
         return hash;
     }
     

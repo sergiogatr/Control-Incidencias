@@ -12,7 +12,6 @@ import org.japo.java.libraries.UtilesUsuarios;
 public final class Usuario implements Serializable {
     
     
-    
     private int id;
     private String user;
     private String pass;
@@ -20,7 +19,6 @@ public final class Usuario implements Serializable {
     private int perfil;
     private String perfilInfo;
 
-    
 
     public Usuario() {
         
@@ -41,11 +39,13 @@ public final class Usuario implements Serializable {
             this.id = UtilesUsuarios.DEF_ID;
         }
         
+        
         if (UtilesUsuarios.validarUser(user)) {
             this.user = user;
         } else {
             this.user = UtilesUsuarios.DEF_USER;
         }
+        
         
         if (UtilesUsuarios.validarPass(pass)) {
             this.pass = pass;
@@ -53,17 +53,20 @@ public final class Usuario implements Serializable {
             this.pass = UtilesUsuarios.DEF_PASS;
         }
         
+        
         if (UtilesUsuarios.validarAvatar(avatar)) {
             this.avatar = avatar;
         } else {
             this.avatar = UtilesUsuarios.DEF_AVATAR;
         }
         
+        
         if (UtilesPerfiles.validarId(perfil)) {
             this.perfil = perfil;
         } else {
             this.perfil = UtilesPerfiles.DEF_ID;
         }
+        
         
         if (UtilesPerfiles.validarInfo(perfilInfo)) {
             this.perfilInfo = perfilInfo;
@@ -82,6 +85,7 @@ public final class Usuario implements Serializable {
             this.id = id;
         }
     }
+    
 
     public String getUser() {
         return user;
@@ -93,6 +97,7 @@ public final class Usuario implements Serializable {
         }
     }
 
+    
     public String getPass() {
         return pass;
     }
@@ -102,6 +107,7 @@ public final class Usuario implements Serializable {
             this.pass = pass;
         }
     }
+    
 
     public String getAvatar() {
         return avatar;
@@ -113,6 +119,7 @@ public final class Usuario implements Serializable {
         }
     }
     
+    
     public int getPerfil() {
         return perfil;
     }
@@ -123,6 +130,7 @@ public final class Usuario implements Serializable {
         }
     }
     
+    
     public String getPerfilInfo() {
         return perfilInfo;
     }
@@ -132,6 +140,7 @@ public final class Usuario implements Serializable {
             this.perfilInfo = perfilInfo;
         }
     }
+    
 
     // VALIDACIONES
     private boolean validarId() {
@@ -193,14 +202,14 @@ public final class Usuario implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 53 * hash + this.id;
-        hash = 53 * hash + Objects.hashCode(this.user);
-        hash = 53 * hash + Objects.hashCode(this.pass);
-        hash = 53 * hash + Objects.hashCode(this.avatar);
-        hash = 53 * hash + this.perfil;
-        hash = 53 * hash + Objects.hashCode(this.perfilInfo);
+        int hash = 3;
+        hash = 79 * hash + this.id;
+        hash = 79 * hash + Objects.hashCode(this.user);
+        hash = 79 * hash + Objects.hashCode(this.pass);
+        hash = 79 * hash + Objects.hashCode(this.avatar);
+        hash = 79 * hash + this.perfil;
+        hash = 79 * hash + Objects.hashCode(this.perfilInfo);
         return hash;
     }
-
+ 
 }

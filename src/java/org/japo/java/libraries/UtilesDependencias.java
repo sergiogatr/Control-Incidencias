@@ -9,18 +9,20 @@ package org.japo.java.libraries;
  *
  * @author Sergio García Trincado - elfragger@gmail.com
  */
-public final class UtilesEspecialidades {
-    
-    // Constantes
+public final class UtilesDependencias {
+
+    // Valores por Defecto
     public static final int DEF_ID = 0;
     public static final String DEF_NOMBRE = "Indefinido";
-    public static final String DEF_INFO = "Especialidad Indefinida";
+    public static final String DEF_INFO = "No se, no esta Carlos Baute";
+    public static final String DEF_CODIGO = "Código Base";
 
     // Expresiones Regulares ( Validación )
-    public static final String REG_NOMBRE = "[\\w áéíóúüñçÁÉÍÓÚÜÑÇ]{3,50}";
-    public static final String REG_INFO = "[\\w áéíóúüñçÁÉÍÓÚÜÑÇ]{3,255}";
+    public static final String REG_NOMBRE = "[\\w]{3,30}";
+    public static final String REG_INFO = "[\\w áéíóúüñçÁÉÍÓÚÜÑÇ]{3,100}";
+    public static final String REG_CODIGO = "[\\w áéíóúüñçÁÉÍÓÚÜÑÇ]{3,10}";
 
-    private UtilesEspecialidades() {
+    private UtilesDependencias() {
 
     }
 
@@ -34,6 +36,10 @@ public final class UtilesEspecialidades {
 
     public static final boolean validarInfo(String info) {
         return info.matches(REG_INFO);
+    }
+    
+    public static final boolean validarCodigo(String codigo) {
+        return codigo.matches(REG_CODIGO);
     }
 
 }

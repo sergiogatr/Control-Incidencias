@@ -15,20 +15,20 @@ import org.japo.java.libraries.UtilesEspecialidades;
  */
 public final class Especialidad implements Serializable {
  
+    
     // Campos
     private int id;
     private String nombre;
     private String info;
-
-    // Constantes Predefinidos
-    private static final int DEF_ID = 0;
-    private static final String DEF_NOMBRE = "Indefinido";
-    private static final String DEF_INFO = "Especialidad Indefinida";
+        
     
+    // Constructores
     public Especialidad() {
-        id = DEF_ID;
-        nombre = DEF_NOMBRE;
-        info = DEF_INFO;
+        
+        this.id = UtilesEspecialidades.DEF_ID;
+        this.nombre = UtilesEspecialidades.DEF_NOMBRE;
+        this.info = UtilesEspecialidades.DEF_INFO;
+        
     }
 
     public Especialidad(int id, String nombre, String info) {
@@ -40,12 +40,14 @@ public final class Especialidad implements Serializable {
             this.id = UtilesEspecialidades.DEF_ID;
         }
         
+        
         // Validación Nombre
         if (UtilesEspecialidades.validarNombre(nombre)) {
             this.nombre = nombre;
         } else {
             this.nombre = UtilesEspecialidades.DEF_NOMBRE;
         }
+        
         
         // Validación Info
         if (UtilesEspecialidades.validarInfo(info)) {
@@ -56,29 +58,39 @@ public final class Especialidad implements Serializable {
         
     }
 
+    
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        if (UtilesEspecialidades.validarId(id)) {
+            this.id = id;
+        } 
     }
 
+    
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        if (UtilesEspecialidades.validarNombre(nombre)) {
+            this.nombre = nombre;
+        }
     }
 
+    
     public String getInfo() {
         return info;
     }
 
     public void setInfo(String info) {
-        this.info = info;
+        if (UtilesEspecialidades.validarInfo(info)) {
+            this.info = info;
+        }
     }
+    
     
         @Override
     public boolean equals(Object o) {
@@ -93,13 +105,15 @@ public final class Especialidad implements Serializable {
         return testOK;
     }
 
+    
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 31 * hash + this.id;
-        hash = 31 * hash + Objects.hashCode(this.nombre);
-        hash = 31 * hash + Objects.hashCode(this.info);
+        hash = 67 * hash + this.id;
+        hash = 67 * hash + Objects.hashCode(this.nombre);
+        hash = 67 * hash + Objects.hashCode(this.info);
         return hash;
     }
+    
     
 }
