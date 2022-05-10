@@ -13,14 +13,12 @@ public final class UtilesDependencias {
 
     // Valores por Defecto
     public static final int DEF_ID = 0;
-    public static final String DEF_NOMBRE = "Indefinido";
+    public static final String DEF_NOMBRE = "D00";
     public static final String DEF_INFO = "No se, no esta Carlos Baute";
-    public static final String DEF_CODIGO = "Código Base";
 
     // Expresiones Regulares ( Validación )
-    public static final String REG_NOMBRE = "[\\w]{3,30}";
+    public static final String REG_NOMBRE = "[\\w]{3,10}";
     public static final String REG_INFO = "[\\w áéíóúüñçÁÉÍÓÚÜÑÇ]{3,100}";
-    public static final String REG_CODIGO = "[\\w áéíóúüñçÁÉÍÓÚÜÑÇ]{3,10}";
 
     private UtilesDependencias() {
 
@@ -37,9 +35,4 @@ public final class UtilesDependencias {
     public static final boolean validarInfo(String info) {
         return info.matches(REG_INFO);
     }
-    
-    public static final boolean validarCodigo(String codigo) {
-        return codigo.matches(REG_CODIGO);
-    }
-
 }

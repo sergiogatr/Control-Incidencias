@@ -81,7 +81,7 @@ public final class Usuario implements Serializable {
     }
 
     public void setId(int id) {
-        if (validarId()) {
+        if (UtilesUsuarios.validarId(id)) {
             this.id = id;
         }
     }
@@ -92,7 +92,7 @@ public final class Usuario implements Serializable {
     }
 
     public void setUser(String user) {
-        if (validarUser()) {
+        if (UtilesUsuarios.validarUser(user)) {
             this.user = user;
         }
     }
@@ -103,7 +103,7 @@ public final class Usuario implements Serializable {
     }
 
     public void setPass(String pass) {
-        if (validarPass()) {
+        if (UtilesUsuarios.validarPass(pass)) {
             this.pass = pass;
         }
     }
@@ -114,7 +114,7 @@ public final class Usuario implements Serializable {
     }
 
     public void setAvatar(String avatar) {
-        if (validarAvatar()) {
+        if (UtilesUsuarios.validarAvatar(avatar)) {
             this.avatar = avatar;
         }
     }
@@ -125,7 +125,7 @@ public final class Usuario implements Serializable {
     }
 
     public void setPerfil(int perfil) {
-        if (validarPerfil()) {
+        if (UtilesPerfiles.validarId(perfil)) {
             this.perfil = perfil;
         }
     }
@@ -136,47 +136,9 @@ public final class Usuario implements Serializable {
     }
 
     public void setPerfilInfo(String perfilInfo) {
-        if (validarPerfilInfo()) {
+        if (UtilesPerfiles.validarInfo(perfilInfo)) {
             this.perfilInfo = perfilInfo;
         }
-    }
-    
-
-    // VALIDACIONES
-    private boolean validarId() {
-        
-        return UtilesUsuarios.validarId(id);
-
-    }
-
-    private boolean validarUser() {
-
-        return UtilesUsuarios.validarUser(user);
-        
-    }
-
-    private boolean validarPass() {
-        
-        return UtilesUsuarios.validarPass(pass);
-        
-    }
-
-    private boolean validarAvatar() {
-        
-        return UtilesUsuarios.validarAvatar(avatar);
-        
-    }
-    
-    private boolean validarPerfil() {
-        
-        return UtilesPerfiles.validarId(perfil);
-        
-    }
-    
-    private boolean validarPerfilInfo() {
-        
-        return UtilesPerfiles.validarInfo(perfilInfo);
-        
     }
     
     @Override

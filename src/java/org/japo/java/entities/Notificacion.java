@@ -8,7 +8,9 @@ package org.japo.java.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import org.japo.java.libraries.UtilesIncidencias;
 import org.japo.java.libraries.UtilesNotificaciones;
+import org.japo.java.libraries.UtilesUsuarios;
 
 /**
  *
@@ -21,7 +23,9 @@ public final class Notificacion implements Serializable {
     private int id;
     private Date fecha;
     private int autor;
+    private String autorNombre;
     private int incidencia;
+    private String incidenciaNombre;
     private String info;
     
     
@@ -29,15 +33,18 @@ public final class Notificacion implements Serializable {
         
         this.id = UtilesNotificaciones.DEF_ID;
         this.fecha = UtilesNotificaciones.DEF_FECHA;
-        this.autor = UtilesNotificaciones.DEF_AUTOR;
-        this.incidencia = UtilesNotificaciones.DEF_INCIDENCIA;
+        this.autor = UtilesUsuarios.DEF_ID;
+        this.autorNombre = UtilesUsuarios.DEF_USER;
+        this.incidencia = UtilesIncidencias.DEF_ID;
+        this.incidenciaNombre = UtilesIncidencias.DEF_NOMBRE;
         this.info = UtilesNotificaciones.DEF_INFO;
         
     }
     
     
 
-    public Notificacion(int id, Date fecha, int autor, int incidencia, String info) {
+    public Notificacion(int id, Date fecha, int autor, String autorNombre,
+            int incidencia, String incidenciaNombre, String info) {
 
         // Validación ID
         if (UtilesNotificaciones.validarId(id)) {
@@ -56,18 +63,34 @@ public final class Notificacion implements Serializable {
         
         
         // Validación Autor
-        if (UtilesNotificaciones.validarAutor(autor)) {
+        if (UtilesUsuarios.validarId(autor)) {
             this.autor = autor;
         } else {
-            this.autor = UtilesNotificaciones.DEF_AUTOR;
+            this.autor = UtilesUsuarios.DEF_ID;
+        }
+        
+        
+        // Validación Autor Nombre
+        if (UtilesUsuarios.validarUser(autorNombre)) {
+            this.autorNombre = autorNombre;
+        } else {
+            this.autorNombre = UtilesUsuarios.DEF_USER;
         }
         
         
         // Validación Incidencia
-        if (UtilesNotificaciones.validarIncidencia(incidencia)) {
+        if (UtilesIncidencias.validarId(incidencia)) {
             this.incidencia = incidencia;
         } else {
-            this.incidencia = UtilesNotificaciones.DEF_INCIDENCIA;
+            this.incidencia = UtilesIncidencias.DEF_ID;
+        }
+        
+        
+        // Validación Incidencia Nombre
+        if (UtilesIncidencias.validarNombre(incidenciaNombre)) {
+            this.incidenciaNombre = incidenciaNombre;
+        } else {
+            this.incidenciaNombre = UtilesIncidencias.DEF_NOMBRE;
         }
         
         
@@ -108,19 +131,41 @@ public final class Notificacion implements Serializable {
     }
 
     public void setAutor(int autor) {
-        if (UtilesNotificaciones.validarAutor(autor)) {
+        if (UtilesUsuarios.validarId(autor)) {
             this.autor = autor;
         } 
     }
     
     
+    public String getAutorNombre() {
+        return autorNombre;
+    }
+
+    public void setAutorNombre(String autorNombre) {
+        if (UtilesUsuarios.validarUser(autorNombre)) {
+            this.autorNombre = autorNombre;
+        } 
+    }
+    
+    
     public int getIncidencia() {
-        return id;
+        return incidencia;
     }
 
     public void setIncidencia(int incidencia) {
-        if (UtilesNotificaciones.validarIncidencia(incidencia)) {
+        if (UtilesIncidencias.validarId(incidencia)) {
             this.incidencia = incidencia;
+        } 
+    }
+    
+    
+    public String getIncidenciaNombre() {
+        return incidenciaNombre;
+    }
+
+    public void setIncidenciaNombre(String incidenciaNombre) {
+        if (UtilesIncidencias.validarNombre(incidenciaNombre)) {
+            this.incidenciaNombre = incidenciaNombre;
         } 
     }
 
@@ -145,7 +190,9 @@ public final class Notificacion implements Serializable {
                     = id == e.getId()
                     && fecha.equals(e.getFecha())
                     && autor == e.getAutor()
+                    && autorNombre.equals(e.getAutorNombre())
                     && incidencia == e.getIncidencia()
+                    && incidenciaNombre.equals(e.getIncidenciaNombre())
                     && info.equals(e.getInfo());
         }
         return testOK;
@@ -155,11 +202,13 @@ public final class Notificacion implements Serializable {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 61 * hash + this.id;
-        hash = 61 * hash + Objects.hashCode(this.fecha);
-        hash = 61 * hash + this.autor;
-        hash = 61 * hash + this.incidencia;
-        hash = 61 * hash + Objects.hashCode(this.info);
+        hash = 37 * hash + this.id;
+        hash = 37 * hash + Objects.hashCode(this.fecha);
+        hash = 37 * hash + this.autor;
+        hash = 37 * hash + Objects.hashCode(this.autorNombre);
+        hash = 37 * hash + this.incidencia;
+        hash = 37 * hash + Objects.hashCode(this.incidenciaNombre);
+        hash = 37 * hash + Objects.hashCode(this.info);
         return hash;
     }
     

@@ -8,7 +8,10 @@ package org.japo.java.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import org.japo.java.libraries.UtilesDependencias;
+import org.japo.java.libraries.UtilesEspecialidades;
 import org.japo.java.libraries.UtilesIncidencias;
+import org.japo.java.libraries.UtilesUsuarios;
 
 /**
  *
@@ -24,8 +27,11 @@ public final class Incidencia implements Serializable {
     private int estado;
     private Date creacion;
     private int autor;
+    private String autorNombre;
     private int dependencia;
+    private String dependenciaNombre;
     private int especialidad;
+    private String especialidadNombre;
     
     
     
@@ -36,16 +42,21 @@ public final class Incidencia implements Serializable {
         this.info = UtilesIncidencias.DEF_INFO;
         this.estado = UtilesIncidencias.DEF_ESTADO;
         this.creacion = UtilesIncidencias.DEF_CREACION;
-        this.autor = UtilesIncidencias.DEF_AUTOR;
-        this.dependencia = UtilesIncidencias.DEF_DEPENDENCIA;
-        this.especialidad = UtilesIncidencias.DEF_ESPECIALIDAD;
+        this.autor = UtilesUsuarios.DEF_ID;
+        this.autorNombre = UtilesUsuarios.DEF_USER;
+        this.dependencia = UtilesDependencias.DEF_ID;
+        this.dependenciaNombre = UtilesDependencias.DEF_NOMBRE;
+        this.especialidad = UtilesEspecialidades.DEF_ID;
+        this.especialidadNombre = UtilesEspecialidades.DEF_NOMBRE;
         
     }
     
     
 
     public Incidencia(int id, String nombre, String info, int estado,
-            Date creacion, int autor, int dependencia, int especialidad ) {
+            Date creacion, int autor, String autorNombre, 
+            int dependencia, String dependenciaNombre, int especialidad,
+            String especialidadNombre) {
 
         // Validación ID
         if (UtilesIncidencias.validarId(id)) {
@@ -88,28 +99,51 @@ public final class Incidencia implements Serializable {
         
         
         // Validación Autor
-        if (UtilesIncidencias.validarAutor(autor)) {
+        if (UtilesUsuarios.validarId(autor)) {
             this.autor = autor;
         } else {
-            this.autor = UtilesIncidencias.DEF_AUTOR;
+            this.autor = UtilesUsuarios.DEF_ID;
+        }
+        
+        
+        // Validación Autor Nombre
+        if (UtilesUsuarios.validarUser(autorNombre)) {
+            this.autorNombre = autorNombre;
+        } else {
+            this.autorNombre = UtilesUsuarios.DEF_USER;
         }
         
         
         // Validación Dependencia
-        if (UtilesIncidencias.validarDependencia(dependencia)) {
+        if (UtilesDependencias.validarId(dependencia)) {
             this.dependencia = dependencia;
         } else {
-            this.dependencia = UtilesIncidencias.DEF_DEPENDENCIA;
+            this.dependencia = UtilesDependencias.DEF_ID;
+        }
+        
+        
+        // Validación Dependencia Nombre
+        if (UtilesDependencias.validarNombre(dependenciaNombre)) {
+            this.dependenciaNombre = dependenciaNombre;
+        } else {
+            this.dependenciaNombre = UtilesDependencias.DEF_NOMBRE;
         }
         
         
         // Validación Dependencia
-        if (UtilesIncidencias.validarEspecialidad(especialidad)) {
+        if (UtilesEspecialidades.validarId(especialidad)) {
             this.especialidad = especialidad;
         } else {
-            this.especialidad = UtilesIncidencias.DEF_ESPECIALIDAD;
+            this.especialidad = UtilesEspecialidades.DEF_ID;
         }
         
+        
+        // Validación Dependencia Nombre
+        if (UtilesEspecialidades.validarNombre(especialidadNombre)) {
+            this.especialidadNombre = especialidadNombre;
+        } else {
+            this.especialidadNombre = UtilesEspecialidades.DEF_NOMBRE;
+        }
         
     }
 
@@ -173,8 +207,19 @@ public final class Incidencia implements Serializable {
     }
 
     public void setAutor(int autor) {
-        if (UtilesIncidencias.validarAutor(autor)) {
+        if (UtilesUsuarios.validarId(autor)) {
             this.autor = autor;
+        } 
+    }
+    
+    
+    public String getAutorNombre() {
+        return autorNombre;
+    }
+
+    public void setAutorNombre(String autorNombre) {
+        if (UtilesUsuarios.validarUser(autorNombre)) {
+            this.autorNombre = autorNombre;
         } 
     }
     
@@ -184,19 +229,41 @@ public final class Incidencia implements Serializable {
     }
 
     public void setDependencia(int dependencia) {
-        if (UtilesIncidencias.validarDependencia(dependencia)) {
+        if (UtilesDependencias.validarId(dependencia)) {
             this.dependencia = dependencia;
         } 
     }
 
+    
+    public String getDependenciaNombre() {
+        return dependenciaNombre;
+    }
+
+    public void setDependenciaNombre(String dependenciaNombre) {
+        if (UtilesDependencias.validarNombre(dependenciaNombre)) {
+            this.dependenciaNombre = dependenciaNombre;
+        } 
+    }
+    
     
     public int getEspecialidad() {
         return especialidad;
     }
 
     public void setEspecialidad(int especialidad) {
-        if (UtilesIncidencias.validarEspecialidad(especialidad)) {
+        if (UtilesEspecialidades.validarId(especialidad)) {
             this.especialidad = especialidad;
+        } 
+    }
+    
+    
+    public String getEspecialidadNombre() {
+        return especialidadNombre;
+    }
+
+    public void setEspecialidadNombre(String especialidadNombre) {
+        if (UtilesEspecialidades.validarNombre(especialidadNombre)) {
+            this.especialidadNombre = especialidadNombre;
         } 
     }
     
@@ -213,8 +280,11 @@ public final class Incidencia implements Serializable {
                     && estado == e.getEstado()
                     && creacion.equals(e.getCreacion())
                     && autor == e.getAutor()
+                    && autorNombre.equals(e.getAutorNombre())
                     && dependencia == e.getDependencia()
-                    && especialidad == e.getEspecialidad();
+                    && dependenciaNombre.equals(e.getDependenciaNombre())
+                    && especialidad == e.getEspecialidad()
+                    && especialidadNombre.equals(e.getEspecialidadNombre());
         }
         return testOK;
     }
@@ -223,15 +293,18 @@ public final class Incidencia implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 11 * hash + this.id;
-        hash = 11 * hash + Objects.hashCode(this.nombre);
-        hash = 11 * hash + Objects.hashCode(this.info);
-        hash = 11 * hash + this.estado;
-        hash = 11 * hash + Objects.hashCode(this.creacion);
-        hash = 11 * hash + this.autor;
-        hash = 11 * hash + this.dependencia;
-        hash = 11 * hash + this.especialidad;
+        hash = 37 * hash + this.id;
+        hash = 37 * hash + Objects.hashCode(this.nombre);
+        hash = 37 * hash + Objects.hashCode(this.info);
+        hash = 37 * hash + this.estado;
+        hash = 37 * hash + Objects.hashCode(this.creacion);
+        hash = 37 * hash + this.autor;
+        hash = 37 * hash + Objects.hashCode(this.autorNombre);
+        hash = 37 * hash + this.dependencia;
+        hash = 37 * hash + Objects.hashCode(this.dependenciaNombre);
+        hash = 37 * hash + this.especialidad;
+        hash = 37 * hash + Objects.hashCode(this.especialidadNombre);
         return hash;
     }
-     
+ 
 }

@@ -19,10 +19,7 @@ public final class UtilesIncidencias {
     public static final String DEF_NOMBRE = "Incidencia";
     public static final String DEF_INFO = "Incidencia Indefinida";
     public static final int DEF_ESTADO = 0;
-    public static final Date DEF_CREACION = Date.from(Instant.MIN);
-    public static final int DEF_AUTOR = 0;
-    public static final int DEF_DEPENDENCIA = 0;
-    public static final int DEF_ESPECIALIDAD = 0;
+    public static final Date DEF_CREACION = new Date();
    
 
     // Expresiones Regulares ( Validación )
@@ -50,18 +47,6 @@ public final class UtilesIncidencias {
     }
     
     public static final boolean validarCreacion(Date creacion) {
-        return creacion != DEF_CREACION;
-    }
-    
-    public static final boolean validarAutor(int autor) {
-        return autor >= DEF_AUTOR;
-    }
-    
-    public static final boolean validarDependencia(int dependencia) {
-        return dependencia >= DEF_DEPENDENCIA;
-    }
-
-    public static final boolean validarEspecialidad(int especialidad) {
-        return especialidad >= DEF_ESPECIALIDAD;
+        return creacion != null;
     }
 }

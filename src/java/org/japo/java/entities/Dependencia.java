@@ -19,7 +19,6 @@ public final class Dependencia {
     private int id;
     private String nombre;
     private String info;
-    private String codigo;
 
     
     // Constructores
@@ -28,11 +27,10 @@ public final class Dependencia {
         this.id = UtilesDependencias.DEF_ID;
         this.nombre = UtilesDependencias.DEF_NOMBRE;
         this.info = UtilesDependencias.DEF_INFO;
-        this.codigo = UtilesDependencias.DEF_CODIGO;
         
     }
     
-    public Dependencia(int id, String nombre, String info, String codigo) {
+    public Dependencia(int id, String nombre, String info) {
         
         // Validación ID
         if (UtilesDependencias.validarId(id)) {
@@ -56,15 +54,6 @@ public final class Dependencia {
         } else {
             this.info = UtilesDependencias.DEF_INFO;
         }
-        
-        
-        // Validación Codigo
-        if (UtilesDependencias.validarCodigo(codigo)) {
-            this.codigo = codigo;
-        } else {
-            this.codigo = UtilesDependencias.DEF_CODIGO;
-        }
-        
         
     }
 
@@ -101,18 +90,6 @@ public final class Dependencia {
             this.info = info;
         }
     }
-    
-    
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        if (UtilesDependencias.validarCodigo(codigo)) {
-            this.codigo = codigo;
-        }
-    }
-    
 
     @Override
     public boolean equals(Object o) {
@@ -122,19 +99,18 @@ public final class Dependencia {
             testOK
                     = id == p.getId()
                     && nombre.equals(p.getNombre())
-                    && info.equals(p.getInfo())
-                    && codigo.equals(p.getCodigo());
+                    && info.equals(p.getInfo());
         }
         return testOK;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 31 * hash + this.id;
-        hash = 31 * hash + Objects.hashCode(this.nombre);
-        hash = 31 * hash + Objects.hashCode(this.info);
-        hash = 31 * hash + Objects.hashCode(this.codigo);
+        int hash = 7;
+        hash = 43 * hash + this.id;
+        hash = 43 * hash + Objects.hashCode(this.nombre);
+        hash = 43 * hash + Objects.hashCode(this.info);
         return hash;
-    }  
+    }
+
 }

@@ -83,11 +83,21 @@ public final class UtilesUsuarios {
         // Request > Nombre de Usuario
         String user = request.getParameter("user");
         
+        // Validar Nombre de Usuario
+        if (!UtilesUsuarios.validarUser(user)) {
+            user = UtilesUsuarios.DEF_USER;
+        }
+        
         // Base de Datos + User > Usuario
         Usuario usuario = dllUsuario.consultar(user);
         
         // Request > Password
         String pass = request.getParameter("pass");
+        
+        // Validar Contraseña
+        if (!UtilesUsuarios.validarPass(pass)) {
+            pass = UtilesUsuarios.DEF_PASS;
+        }
         
         // Validar Password
         if (usuario != null && !usuario.getPass().equals(pass)) {
