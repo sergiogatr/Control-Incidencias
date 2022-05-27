@@ -15,7 +15,7 @@
     </head>
     <body>
         <div id="container">
-            <h2>Credencial Incorrecta</h2>
+            <h2>Acceso Denegado</h2>
             <img src="public/img/error.jpg">
             <p>La credencial introducida no es correcta . . .</p>
             <a href="?cmd=usuario-login">Continuar</a>

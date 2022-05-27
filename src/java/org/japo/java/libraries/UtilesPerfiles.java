@@ -14,6 +14,7 @@ public final class UtilesPerfiles {
     // Códigos de Perfiles
     public static final int BASIC_CODE = 100;
     public static final int ADMIN_CODE = 800;
+    public static final int DEVEL_CODE = 900;
 
     // Nombres de Perfiles
     public static final String BASIC_NAME = "Usuario";
