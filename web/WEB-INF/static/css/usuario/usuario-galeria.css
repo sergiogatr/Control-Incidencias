@@ -1,0 +1,63 @@
+*, *:before, *::after {
+    margin: 0;
+    padding: 0;
+    
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    font-size: 2.5vh;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+#galeria {
+    gap: 2rem;
+    min-height: 550px;
+    
+    padding: 2rem;  
+    
+    background: linear-gradient(90deg, rgba(36,13,0,1) 0%, rgba(115,121,9,1) 35%, rgba(9,120,121,1) 50%, rgba(255,0,232,1) 100%);
+    
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+#galeria > div {
+    background-color: white;
+    border-radius: 20px;
+}
+
+#galeria * {
+    padding: 1rem;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a > p {
+    text-align: justify;
+    border-bottom: 1px solid grey;
+}
+
+#ficha > a > img {
+    height: 200px;
+    width: 180px;
+    
+    margin: 0;
+    padding: 0;
+    
+    border-radius: 20px;
+    border: 1px solid grey;
+    object-fit: cover;
+}

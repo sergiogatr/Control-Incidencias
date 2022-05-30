@@ -1,5 +1,6 @@
-package org.japo.java.dll.usuario;
+package org.japo.java.dll.perfil;
 
+import org.japo.java.dll.usuario.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletConfig;
 import javax.sql.DataSource;
+import org.japo.java.entities.Perfil;
 import org.japo.java.entities.Usuario;
 import org.japo.java.entities.Usuarios;
 import org.japo.java.libraries.UtilesServlets;
@@ -16,12 +18,12 @@ import org.japo.java.libraries.UtilesServlets;
  *
  * @author Sergio García Trincado - elfragger@gmail.com
  */
-public final class DLLUsuario {
+public final class DLLPerfil {
 
     // Acceso a la Base de Datos ( Pool de Conexiones )
     private DataSource ds;
 
-    public DLLUsuario(ServletConfig config) {
+    public DLLPerfil(ServletConfig config) {
         ds = UtilesServlets.obtenerDataSource(config);
     }
 
@@ -82,24 +84,19 @@ public final class DLLUsuario {
     }
 
     // LISTADO ( GALERÍA ) 
-    public final List<Usuario> listar() {
+    public final List<Perfil> listar() {
 
         // SQL
         String sql = ""
                 + "SELECT "
-                + "usuarios.id AS id, "
-                + "usuarios.user AS user, "
-                + "usuarios.pass AS pass, "
-                + "usuarios.avatar AS avatar, "
-                + "usuarios.perfil AS perfil, "
-                + "perfiles.info AS perfil_info "
+                + "perfiles.id AS id, "
+                + "perfiles.nombre AS nombre, "
+                + "perfiles.info AS info "
                 + "FROM "
-                + "usuarios "
-                + "INNER JOIN "
-                + "perfiles ON perfiles.id = usuarios.perfil";
+                + "perfiles";
 
         // Coleccion 
-        List<Usuario> usuarios = new ArrayList<>();
+        List<Perfil> perfiles = new ArrayList<>();
 
         // Busqueda
         try {
@@ -112,15 +109,12 @@ public final class DLLUsuario {
                     while (rs.next()) {
                         // File Actual > Campos
                         int id = rs.getInt("id");
-                        String user = rs.getString("user");
-                        String pass = rs.getString("pass");
-                        String avatar = rs.getString("avatar");
-                        int perfil = rs.getInt("perfil");
-                        String perfilInfo = rs.getString("perfil_info");
+                        String nombre = rs.getString("nombre");
+                        String info = rs.getString("info");
 
-                        Usuario usuario = new Usuario(id, user, pass, avatar, perfil, perfilInfo);
+                        Perfil perfil = new Perfil(id, nombre, info);
 
-                        usuarios.add(usuario);
+                        perfiles.add(perfil);
                     }
                 }
 
@@ -131,7 +125,7 @@ public final class DLLUsuario {
         }
 
         // Retorno
-        return usuarios;
+        return perfiles;
     }
     
     // BORRADO USUARIO

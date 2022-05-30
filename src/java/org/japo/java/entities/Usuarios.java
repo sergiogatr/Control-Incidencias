@@ -9,7 +9,7 @@ import org.japo.java.libraries.UtilesUsuarios;
  *
  * @author Sergio García Trincado - elfragger@gmail.com
  */
-public final class Usuario implements Serializable {
+public final class Usuarios implements Serializable {
     
     
     private int id;
@@ -17,21 +17,19 @@ public final class Usuario implements Serializable {
     private String pass;
     private String avatar;
     private int perfil;
-    private String perfilInfo;
 
 
-    public Usuario() {
+    public Usuarios() {
         
         id = UtilesUsuarios.DEF_ID;
         user = UtilesUsuarios.DEF_USER;
         pass = UtilesUsuarios.DEF_PASS;
         avatar = UtilesUsuarios.DEF_AVATAR;
         perfil = UtilesPerfiles.DEF_ID;
-        perfilInfo = UtilesPerfiles.DEF_INFO;
         
     }
 
-    public Usuario(int id, String user, String pass, String avatar, int perfil, String perfilInfo) {
+    public Usuarios(int id, String user, String pass, String avatar, int perfil) {
         
         if (UtilesUsuarios.validarId(id)) {
             this.id = id;
@@ -65,13 +63,6 @@ public final class Usuario implements Serializable {
             this.perfil = perfil;
         } else {
             this.perfil = UtilesPerfiles.DEF_ID;
-        }
-        
-        
-        if (UtilesPerfiles.validarInfo(perfilInfo)) {
-            this.perfilInfo = perfilInfo;
-        } else {
-            this.perfilInfo = UtilesPerfiles.DEF_INFO;
         }
 
     }
@@ -130,33 +121,20 @@ public final class Usuario implements Serializable {
         }
     }
     
-    
-    public String getPerfilInfo() {
-        return perfilInfo;
-    }
-
-    public void setPerfilInfo(String perfilInfo) {
-        if (UtilesPerfiles.validarInfo(perfilInfo)) {
-            this.perfilInfo = perfilInfo;
-        }
-    }
-    
     @Override
     public boolean equals(Object o) {
         
         boolean testOK = false;
         
-        if (o instanceof Usuario) {
-            Usuario u = (Usuario) o;
+        if (o instanceof Usuarios) {
+            Usuarios u = (Usuarios) o;
             testOK = 
             
             id == u.getId() &&
             user.equals(u.getUser()) &&
             pass.equals(u.getPass()) &&
             avatar.equals(u.getAvatar()) &&
-            perfil == u.getPerfil() &&
-            perfilInfo.equals(u.getPerfilInfo());
-                    
+            perfil == u.getPerfil();
         }
         
         return testOK;
@@ -164,14 +142,15 @@ public final class Usuario implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 79 * hash + this.id;
-        hash = 79 * hash + Objects.hashCode(this.user);
-        hash = 79 * hash + Objects.hashCode(this.pass);
-        hash = 79 * hash + Objects.hashCode(this.avatar);
-        hash = 79 * hash + this.perfil;
-        hash = 79 * hash + Objects.hashCode(this.perfilInfo);
+        int hash = 7;
+        hash = 53 * hash + this.id;
+        hash = 53 * hash + Objects.hashCode(this.user);
+        hash = 53 * hash + Objects.hashCode(this.pass);
+        hash = 53 * hash + Objects.hashCode(this.avatar);
+        hash = 53 * hash + this.perfil;
         return hash;
     }
+
+
  
 }

@@ -9,17 +9,19 @@
 <%@page import="org.japo.java.entities.Usuario"%>
 <%@page import="org.japo.java.libraries.UtilesUsuarios"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%
-    // Datos Inyectados
-    List<Usuario> usuarios = (ArrayList<Usuario>) request.getAttribute("usuarios");
-%>
 
+<%
+
+ Usuario d = (Usuario) request.getAttribute("usuarios");
+
+%>
+        
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Usuario | Galería</title>
-        <link rel="stylesheet" href="public/css/usuario/usuario-galeria.css"/>
+        <title>Usuario | Consulta <%= d.getUser()%></title>
+        <link rel="stylesheet" href="public/css/usuario/usuario-consulta.css"/>
         <link rel="stylesheet" href="public/css/partials/header.css"/>
         <link rel="stylesheet" href="public/css/partials/footer.css"/>
         <link rel="icon" type="image/ico" href="public/img/favicon.ico"/>
@@ -27,21 +29,20 @@
     <body>
         <%@include file="../partials/header.jspf" %>
         
-        <div class="galeria" id="galeria">
+        <div class="container" id="container">
         
-            <% for (Usuario u : usuarios) { %>
-        
-            <div class="galeria" id="ficha">
+            <div id="ficha">
             
-                <a class="ficha" href="?cmd=usuario-consulta&user=<%= u.getUser() %>">
-                    <img src="<%= u.getAvatar() %>" alt="avatar"/>
-                    <p class="id"><%= u.getId() %></p>
-                    <p class="id"><%= u.getUser() %></p>
-                    <p class="id"><%= u.getPerfilInfo() %></p>
-                </a>
+                <div class="ficha">
+                    <img alt="avatar" src="<%= d.getAvatar()%>"/>
+                    <p class="id"><%= d.getId()%></p>
+                    <p class="id"><%= d.getUser()%></p>
+                    <p class="id"><%= d.getPerfilInfo()%></p> 
+                    <a href="?cmd=usuario-modificacion&id=<%= d.getId()%>">Modificar</a>
+                    <a href="?cmd=usuario-borrado&user=<%= d.getUser()%>">Borrar</a>
+                </div>
                 
-            </div>
-            <% }%>          
+            </div>          
             
         </div>
         

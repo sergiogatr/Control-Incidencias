@@ -6,6 +6,7 @@
 package org.japo.java.bll.commands.usuario;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import org.japo.java.bll.commands.Command;
 import org.japo.java.dll.usuario.DLLUsuario;
@@ -15,13 +16,13 @@ import org.japo.java.entities.Usuario;
  *
  * @author Sergio García Trincado - elfragger@gmail.com
  */
-public class CommandUsuarioBorrado extends Command {
+public class CommandUsuarioConsulta extends Command {
 
     @Override
     public void process() throws ServletException, IOException {
 
         // Salida
-        String out = "usuario/usuario-borrado";
+        String out = "usuario/usuario-consulta";
         
         // Validar Sesión
         if (validarSesion(request)) {
@@ -38,11 +39,10 @@ public class CommandUsuarioBorrado extends Command {
                 String user = request.getParameter("user");
             
                 // ID > Datos Usuario
-                boolean datos = dllUsuario.borrar(user);
+                Usuario datos = dllUsuario.consultar(user);
                 
-                if (datos == true) {
-                    out = "main/main-admin";
-                }
+                // Inyecta Datos > JSP
+                request.setAttribute("usuarios", datos);
             
             } else {
                 out = "message/acceso-denegado";
@@ -53,6 +53,6 @@ public class CommandUsuarioBorrado extends Command {
         }
         
         // Redirección
-            forward(out);
+        forward(out);
     }
 }

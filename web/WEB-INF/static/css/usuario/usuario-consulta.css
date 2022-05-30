@@ -1,0 +1,80 @@
+*, *:before, *::after {
+    margin: 0;
+    padding: 0;
+    
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    font-size: 2.5vh;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+#container {
+    height: calc(100vh - 10rem);
+    gap: 3rem;
+    
+    background: linear-gradient(90deg, rgba(36,13,0,1) 0%, rgba(115,121,9,1) 35%, rgba(9,120,121,1) 50%, rgba(255,0,232,1) 100%);
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#ficha {
+    background-color: white;
+    padding: 3rem;
+    
+    border-radius: 20px;
+}
+
+#ficha > * {
+    gap: 1rem;
+    
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    justify-content: center;
+    align-items: center;
+}
+
+#ficha img {
+    grid-row: span 5;
+    object-fit: cover;
+    
+    width: 180px;
+    height: 200px;
+    
+    padding: 0;
+    margin: 0;
+    
+    border-radius: 20px;
+    border: 1px solid grey;
+}
+
+#ficha p {
+    text-align: justify;
+    border-bottom: 1px solid grey;
+}
+
+#ficha a {
+    text-decoration: none;
+    font-family: monospace;
+    transition: 0.3s;
+    
+    color: black;
+    border: 1px solid grey;
+    border-radius: 20px;
+    
+    padding: 1rem 7rem;
+}
+
+#ficha a:hover {
+    background-color: grey;
+    border: 1px solid black;
+    color: white;
+}

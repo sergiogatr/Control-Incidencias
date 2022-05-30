@@ -21,6 +21,11 @@
         <div id="container">
             <p>Página Principal Administrador</p>
             <img src="public/img/admin.jpg" alt="alt"/>
+            
+            <div id="buttonset">
+                <a href="?cmd=usuario-galeria">Galería</a>
+                <a href="?cmd=usuario-insercion&op=captura">Insercion</a>
+            </div>
         </div>
         
         <%@include file="../partials/footer.jspf" %>
