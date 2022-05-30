@@ -29,39 +29,48 @@ public class CommandUsuarioModificacion extends Command {
         // Nombre de la Pagina de Salida
         String out;
 
-        // Obtener Operación
-        String op = request.getParameter("op");
+        try {
+            // Obtener ID Categorias requerido
+            int id = Integer.parseInt(request.getParameter("id"));
+        
+            // Obtener Operación
+            String op = request.getParameter("op");
+            
+            Usuarios u;
 
-        switch (op) {
-            // Invoca Formulario de Captura de Datos
-            case "captura":
+            switch (op) {
+                // Invoca Formulario de Captura de Datos
+                case "captura":
                 
-                // Capas de Datos
-                DLLPerfil dllPerfil = new DLLPerfil(config);
+                    // Capas de Datos
+                    DLLUsuario dllUsuario = new DLLUsuario(config);
                 
-                // BD > Lista Usuarios
-                List<Perfil> listaPrf = dllPerfil.listar();
+                    // ID > Categorias a Modificar
+                    u = dllUsuario.obtenerUsuariosID(id);
 
-                request.setAttribute("lista-perfiles", listaPrf);
+                    request.setAttribute("usuarios", u);
+                    out = "usuario/usuario-modificacion";
+                    break;
                 
-                // Usuario + Formulario > Datos Petición
-                out = "usuario/usuario-modificacion";
-                break;
-                
-            // Datos Petición > Base de Datos + Respuesta    
-            case "proceso":
-                // Hacer proceso
-                out = insertarDatosFormulario();
-                break;
-            default:
-                // Page404
-                out = "message/operacion-desconocida";
+                // Datos Petición > Base de Datos + Respuesta    
+                case "proceso":
+                    // Hacer proceso
+                    out = modificarDatosFormulario();
+                    break;
+                default:
+                    // Page404
+                    out = "message/operacion-desconocida";
+            }
+        
+        } catch (Exception e) {
+            // Recurso Inexistente
+            out = "message/operacion-desconocida";
         }
 
         forward(out);
     }
 
-    private String insertarDatosFormulario() {
+    private String modificarDatosFormulario() {
         // Página de Retorno
         String out;
 
@@ -80,8 +89,8 @@ public class CommandUsuarioModificacion extends Command {
             DLLUsuario dllUsuario = new DLLUsuario(config);
             
             // Formulario > Usuario Insertado 
-            boolean insertadoOK = dllUsuario.insertar(u);
-
+            boolean insertadoOK = dllUsuario.modificar(u);
+            
             // Validar
             if (insertadoOK) {
                 out = "main/main-admin";

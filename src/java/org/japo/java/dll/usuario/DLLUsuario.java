@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletConfig;
 import javax.sql.DataSource;
 import org.japo.java.entities.Usuario;
@@ -165,6 +168,8 @@ public final class DLLUsuario {
         return semaforo; 
     }
     
+    
+    // Inserción Usuarios
     public final boolean insertar(Usuarios u) {
         
         // SQL
@@ -194,6 +199,70 @@ public final class DLLUsuario {
             } catch (SQLException | NullPointerException e) {
                 System.out.println(e.getMessage());
             }
+
+        return numReg == 1;
+    }
+    
+    // Obtener Usuarios por ID
+    public final Usuarios obtenerUsuariosID(int _id) throws SQLException {
+        // SQL
+        String sql = "SELECT * FROM usuarios WHERE id=?";
+
+        // Referencia de las Categorias
+        Usuarios u = null;
+
+            try (
+                Connection conn = ds.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+                
+                // Parametrizar Statement
+                ps.setInt(1, _id);
+
+                // Obtener las Categorias
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        // Obtener Campos
+                        int id = rs.getInt("id");
+                        String user = rs.getString("user");
+                        String pass = rs.getString("pass");
+                        String avatar = rs.getString("avatar");
+                        int perfil = rs.getInt("perfil");
+
+                        // Instanciar Categorias
+                        u = new Usuarios(id, user, pass, avatar, perfil);
+                    }
+                }
+
+            }
+
+        return u;
+    }
+    
+    // Modificar Usuarios
+    public final boolean modificar(Usuarios u) {
+        // SQL
+        String sql = "UPDATE usuarios "
+                        + "SET user=?, pass=?, avatar=?, perfil=? "
+                + "WHERE id=?";
+
+        // Número de registros afectados
+        int numReg = 0;
+
+        try (
+            Connection conn = ds.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+            // Parametrizar Sentencia
+            ps.setString(1, u.getUser());
+            ps.setString(2, u.getPass());
+            ps.setString(3, u.getAvatar());
+            ps.setInt(4, u.getPerfil());
+            ps.setInt(5, u.getId());
+
+            // Actualizar las Categorias
+            numReg = ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("ERROR: " + ex.getMessage());
+        }
 
         return numReg == 1;
     }

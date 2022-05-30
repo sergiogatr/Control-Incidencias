@@ -38,7 +38,7 @@
                     <p class="id"><%= d.getId()%></p>
                     <p class="id"><%= d.getUser()%></p>
                     <p class="id"><%= d.getPerfilInfo()%></p> 
-                    <a href="?cmd=usuario-modificacion&id=<%= d.getId()%>">Modificar</a>
+                    <a href="?cmd=usuario-modificacion&op=captura&id=<%= d.getId()%>">Modificar</a>
                     <a href="?cmd=usuario-borrado&user=<%= d.getUser()%>">Borrar</a>
                 </div>
                 
